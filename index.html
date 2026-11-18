@@ -88,9 +88,9 @@ const LINK_KEY = "ahmedabad2047-game-url";
 
 /* ---------- Content (from the question bank and deck) ---------- */
 const PATHWAYS = {
-  A: { key: "manufacturing", name: "Manufacturing-led", hex: "#B9640A", video: "videos/manufacturing-led.mp4" },
-  B: { key: "productivity", name: "Productivity-led", hex: "#0B7A7C", video: "videos/productivity-led.mp4" },
-  C: { key: "global", name: "Globally Connected", hex: "#0B2A5B", video: "videos/globally-connected.mp4" }
+  A: { key: "manufacturing", name: "Manufacturing-led", hex: "#B9640A", video: "fhHgNJSf31s" },
+  B: { key: "productivity", name: "Productivity-led", hex: "#0B7A7C", video: "daosXmIEFks" },
+  C: { key: "global", name: "Globally Connected", hex: "#0B2A5B", video: "NNNCnxGrcPo" }
 };
 
 // Weights 1, 2, 4, 8, 16: each exceeds the sum of all earlier weights, so totals can never tie.
@@ -441,15 +441,19 @@ function Quiz({ index, answers, order, locked, onChoose, onBack }) {
 
 /* ---------- Video (player only, no uploads) ---------- */
 function VideoPanel({ name, file }) {
+  // `file` is the YouTube video ID for this scenario only.
+  const src = `https://www.youtube-nocookie.com/embed/${file}?rel=0&modestbranding=1&playsinline=1`;
   return (
-    <section aria-label={`${name} film`} className="overflow-hidden rounded-[2rem] border-2 border-line bg-white shadow-sm">
+    <section aria-label={`${name} film`} className="overflow-hidden rounded-2xl border-2 border-line bg-white shadow-sm md:rounded-[2rem]">
       <div className="relative aspect-video w-full bg-navy">
-        <video
-          src={file}
-          controls
-          playsInline
-          preload="metadata"
-          className="absolute inset-0 h-full w-full bg-navy object-contain"
+        <iframe
+          key={file}
+          src={src}
+          title={`${name} scenario film`}
+          className="absolute inset-0 h-full w-full border-0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+          allowFullScreen
+          referrerPolicy="strict-origin-when-cross-origin"
         />
       </div>
     </section>
